@@ -69,6 +69,31 @@ title.Font = Enum.Font.SourceSansBold
 title.TextSize = 20
 title.Parent = frame
 
+-- Создаем кнопку для скрытия/показа консоли
+local toggleVisibilityBtn = Instance.new("TextButton")
+toggleVisibilityBtn.Size = UDim2.new(1, -20, 0, 30)
+toggleVisibilityBtn.Position = UDim2.new(0, 10, 0, 40)
+toggleVisibilityBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+toggleVisibilityBtn.Text = "Скрыть консоль"
+toggleVisibilityBtn.TextColor3 = Color3.new(1,1,1)
+toggleVisibilityBtn.Font = Enum.Font.SourceSans
+toggleVisibilityBtn.TextSize = 16
+toggleVisibilityBtn.Parent = frame
+
+local consoleVisible = true
+
+toggleVisibilityBtn.MouseButton1Click:Connect(function()
+    consoleVisible = not consoleVisible
+    if consoleVisible then
+        frame.Visible = true
+        toggleVisibilityBtn.Text = "Скрыть консоль"
+    else
+        frame.Visible = false
+        -- Временно скрываем полностью, чтобы можно было вернуть
+        -- Можно оставить так или добавить отдель кнопку для возврата
+    end
+end)
+
 -- Создаем кнопки для переключения инструментов
 local buttons = {}
 local activeStates = {} -- хранит состояние "активен" или "не активен" для каждого инструмента
@@ -96,16 +121,17 @@ for i, toolName in ipairs(toolsToManage) do
         activeStates[toolName] = not activeStates[toolName]
         if activeStates[toolName] then
             btn.Text = toolName .. " (Активен)"
-            btn.BackgroundColor3 = Color3.fromRGB(100, 200, 100) -- зеленый для активного
+            btn.BackgroundColor3 = Color3.fromRGB(100, 200, 100) -- зеленый
         else
             btn.Text = toolName .. " (Отключен)"
-            btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50) -- красный для отключенного
+            btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50) -- красный
         end
     end)
 end
 
 -- Постоянная проверка и удаление активных инструментов
 game:GetService("RunService").Stepped:Connect(function()
+    if not consoleVisible then return end -- не проверяем, если консоль скрыта
     local backpack = player.Backpack
     local character = player.Character
 
