@@ -8,6 +8,7 @@ local toolsToManage = {
 	"Light Cup",
 	"Gold",
 	"Metal",
+	"Rusty Metal",
 	"Stone",
 	"Wood",
 	"Leather",
