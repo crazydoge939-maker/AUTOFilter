@@ -7,6 +7,7 @@ local toolsToManage = {
     "Acid Cup",
     "Laight Cup",
     "Gold",
+    "Metal",
     "Leather",
     "Meat",
     "Rope"
@@ -18,7 +19,7 @@ screenGui.Parent = playerGui
 
 -- Создаем основной фрейм
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 300, 0, 400)
+frame.Size = UDim2.new(0, 300, 0, 425)
 frame.Position = UDim2.new(0.5, -150, 0.5, -200)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderSizePixel = 2
