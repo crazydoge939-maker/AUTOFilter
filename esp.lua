@@ -5,12 +5,16 @@ local toolsToManage = {
     "Oil Cup",
     "Blood Cup",
     "Acid Cup",
-    "Laight Cup",
+    "Light Cup",
     "Gold",
     "Metal",
+    "Stone",
     "Leather",
     "Meat",
-    "Rope"
+    "Rope",
+    "Orb",
+    "Cursed Orb",
+    "Holy Orb"
 }
 
 local screenGui = Instance.new("ScreenGui")
@@ -19,7 +23,7 @@ screenGui.Parent = playerGui
 
 -- Создаем основной фрейм
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 300, 0, 425)
+frame.Size = UDim2.new(0, 300, 0, 400)
 frame.Position = UDim2.new(0.5, -150, 0.5, -200)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderSizePixel = 2
