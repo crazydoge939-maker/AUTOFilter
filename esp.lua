@@ -1,4 +1,3 @@
-
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
@@ -87,6 +86,8 @@ showBtn.TextColor3 = Color3.new(1,1,1)
 showBtn.Font = Enum.Font.SourceSans
 showBtn.TextSize = 16
 showBtn.Parent = screenGui
+showBtn.Active = true -- чтобы можно было перетаскивать
+showBtn.Draggable = true -- включаем перетаскивание
 showBtn.Visible = false -- изначально скрыта
 
 local consoleVisible = true
