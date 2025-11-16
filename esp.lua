@@ -1,9 +1,7 @@
--- Скрипт для удаления определённых инструментов и управления консолью
 
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
--- Список инструментов для управления
 local toolsToManage = {
     "Oil Cup",
     "Blood Cup",
@@ -15,12 +13,11 @@ local toolsToManage = {
     "Rope"
 }
 
--- Создаем GUI фрейм
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ToolRemovalConsole"
-screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
+-- Создаем основной фрейм
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 300, 0, 400)
 frame.Position = UDim2.new(0.5, -150, 0.5, -200)
@@ -29,7 +26,7 @@ frame.BorderSizePixel = 2
 frame.BorderColor3 = Color3.new(1, 1, 1)
 frame.Parent = screenGui
 
--- Сделать окно перетаскиваемым
+-- Перетаскивание фрейма
 local dragging = false
 local dragInput, dragStart, startPos
 
@@ -59,7 +56,7 @@ game:GetService("UserInputService").InputChanged:Connect(function(input)
     end
 end)
 
--- Создаем заголовок
+-- Заголовок
 local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 30)
 title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -69,7 +66,7 @@ title.Font = Enum.Font.SourceSansBold
 title.TextSize = 20
 title.Parent = frame
 
--- Создаем кнопку для скрытия консоли
+-- Кнопка скрытия
 local hideBtn = Instance.new("TextButton")
 hideBtn.Size = UDim2.new(1, -20, 0, 30)
 hideBtn.Position = UDim2.new(0, 10, 0, 40)
@@ -80,49 +77,43 @@ hideBtn.Font = Enum.Font.SourceSans
 hideBtn.TextSize = 16
 hideBtn.Parent = frame
 
--- Создаем кнопку для "возврата" консоли, изначально скрыта
+-- Создаем кнопку для возвращения, вне фрейма
 local showBtn = Instance.new("TextButton")
-showBtn.Size = UDim2.new(1, -20, 0, 30)
-showBtn.Position = UDim2.new(0, 10, 0, 40)
+showBtn.Size = UDim2.new(0, 150, 0, 30)
+showBtn.Position = UDim2.new(0.5, -75, 0.9, -15)
 showBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 showBtn.Text = "Вернуть консоль"
 showBtn.TextColor3 = Color3.new(1,1,1)
 showBtn.Font = Enum.Font.SourceSans
 showBtn.TextSize = 16
-showBtn.Parent = frame
+showBtn.Parent = screenGui
 showBtn.Visible = false -- изначально скрыта
 
 local consoleVisible = true
 
 hideBtn.MouseButton1Click:Connect(function()
-    -- скрываем окно
     frame.Visible = false
     consoleVisible = false
     hideBtn.Visible = false
-    showBtn.Visible = true -- показываем кнопку "Вернуть"
+    showBtn.Visible = true
 end)
 
 showBtn.MouseButton1Click:Connect(function()
-    -- показываем окно
     frame.Visible = true
     consoleVisible = true
     hideBtn.Visible = true
-    showBtn.Visible = false -- скрываем кнопку "Вернуть"
+    showBtn.Visible = false
 end)
 
--- Создаем кнопки для переключения инструментов
+-- Создаем кнопки инструментов
 local buttons = {}
-local activeStates = {} -- хранит состояние "активен" или "не активен" для каждого инструмента
-
-local buttonSize = UDim2.new(1, -20, 0, 30)
+local activeStates = {}
 local startY = 80
 
 for i, toolName in ipairs(toolsToManage) do
-    -- Инициализируем состояние как "активен" (true)
     activeStates[toolName] = true
-
     local btn = Instance.new("TextButton")
-    btn.Size = buttonSize
+    btn.Size = UDim2.new(1, -20, 0, 30)
     btn.Position = UDim2.new(0, 10, 0, startY + (i - 1) * 35)
     btn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
     btn.Text = toolName .. " (Активен)"
@@ -132,22 +123,21 @@ for i, toolName in ipairs(toolsToManage) do
     btn.Parent = frame
     buttons[toolName] = btn
 
-    -- Обработка нажатия для переключения состояния
     btn.MouseButton1Click:Connect(function()
         activeStates[toolName] = not activeStates[toolName]
         if activeStates[toolName] then
             btn.Text = toolName .. " (Активен)"
-            btn.BackgroundColor3 = Color3.fromRGB(100, 200, 100) -- зеленый
+            btn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
         else
             btn.Text = toolName .. " (Отключен)"
-            btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50) -- красный
+            btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
         end
     end)
 end
 
 -- Постоянная проверка и удаление активных инструментов
 game:GetService("RunService").Stepped:Connect(function()
-    if not consoleVisible then return end -- не проверяем, если консоль скрыта
+    if not consoleVisible then return end
     local backpack = player.Backpack
     local character = player.Character
 
