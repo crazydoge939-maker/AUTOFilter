@@ -11,8 +11,12 @@ local toolsToManage = {
 	"Stone",
 	"Wood",
 	"Leather",
+	"Line Paper",
 	"Meat",
 	"Rope",
+	"Holy Chain",
+	"Shattered Chain",
+	"Coal",
 	"Orb",
 	"Cursed Orb",
 	"Holy Orb"
@@ -25,7 +29,7 @@ screenGui.Parent = playerGui
 
 -- Создаем основной фрейм
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 250, 0, 325)
+frame.Size = UDim2.new(0, 250, 0, 425)
 frame.Position = UDim2.new(0.5, -150, 0.5, -200)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderSizePixel = 2
