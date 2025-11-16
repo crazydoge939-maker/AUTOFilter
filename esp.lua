@@ -116,16 +116,26 @@ local buttons = {}
 local activeStates = {}
 local startY = 80
 
+local buttonsPerRow = 3 -- Количество кнопок в строке
+local buttonSize = UDim2.new(0, 80, 0, 80) -- Размер кнопки (квадратной)
+local spacingX = 10 -- Расстояние между кнопками по горизонтали
+local spacingY = 10 -- Расстояние между кнопками по вертикали
+local startX = 10 -- Начальная позиция X
+local startY = 80 -- Начальная позиция Y (под заголовком)
+
 for i, toolName in ipairs(toolsToManage) do
-    activeStates[toolName] = true
+    local row = math.floor((i - 1) / buttonsPerRow)
+    local col = (i - 1) % buttonsPerRow
+
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, -20, 0, 30)
-    btn.Position = UDim2.new(0, 10, 0, startY + (i - 1) * 35)
+    btn.Size = buttonSize
+    btn.Position = UDim2.new(0, startX + col * (buttonSize.X.Offset + spacingX),
+                               0, startY + row * (buttonSize.Y.Offset + spacingY))
     btn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
     btn.Text = toolName .. " (Активен)"
     btn.TextColor3 = Color3.new(1,1,1)
     btn.Font = Enum.Font.SourceSans
-    btn.TextSize = 16
+    btn.TextSize = 14
     btn.Parent = frame
     buttons[toolName] = btn
 
