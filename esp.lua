@@ -143,7 +143,6 @@ end
 
 -- Постоянная проверка и удаление активных инструментов
 game:GetService("RunService").Stepped:Connect(function()
-    if not consoleVisible then return end
     local backpack = player.Backpack
     local character = player.Character
 
