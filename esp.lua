@@ -69,29 +69,45 @@ title.Font = Enum.Font.SourceSansBold
 title.TextSize = 20
 title.Parent = frame
 
--- Создаем кнопку для скрытия/показа консоли
-local toggleVisibilityBtn = Instance.new("TextButton")
-toggleVisibilityBtn.Size = UDim2.new(1, -20, 0, 30)
-toggleVisibilityBtn.Position = UDim2.new(0, 10, 0, 40)
-toggleVisibilityBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-toggleVisibilityBtn.Text = "Скрыть консоль"
-toggleVisibilityBtn.TextColor3 = Color3.new(1,1,1)
-toggleVisibilityBtn.Font = Enum.Font.SourceSans
-toggleVisibilityBtn.TextSize = 16
-toggleVisibilityBtn.Parent = frame
+-- Создаем кнопку для скрытия консоли
+local hideBtn = Instance.new("TextButton")
+hideBtn.Size = UDim2.new(1, -20, 0, 30)
+hideBtn.Position = UDim2.new(0, 10, 0, 40)
+hideBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+hideBtn.Text = "Скрыть консоль"
+hideBtn.TextColor3 = Color3.new(1,1,1)
+hideBtn.Font = Enum.Font.SourceSans
+hideBtn.TextSize = 16
+hideBtn.Parent = frame
+
+-- Создаем кнопку для показа консоли, изначально скрыта
+local showBtn = Instance.new("TextButton")
+showBtn.Size = UDim2.new(1, -20, 0, 30)
+showBtn.Position = UDim2.new(0, 10, 0, 40)
+showBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+showBtn.Text = "Показать консоль"
+showBtn.TextColor3 = Color3.new(1,1,1)
+showBtn.Font = Enum.Font.SourceSans
+showBtn.TextSize = 16
+showBtn.Parent = frame
+showBtn.Visible = false -- изначально скрыта
 
 local consoleVisible = true
 
-toggleVisibilityBtn.MouseButton1Click:Connect(function()
-    consoleVisible = not consoleVisible
-    if consoleVisible then
-        frame.Visible = true
-        toggleVisibilityBtn.Text = "Скрыть консоль"
-    else
-        frame.Visible = false
-        -- Временно скрываем полностью, чтобы можно было вернуть
-        -- Можно оставить так или добавить отдель кнопку для возврата
-    end
+hideBtn.MouseButton1Click:Connect(function()
+    -- скрываем окно
+    frame.Visible = false
+    consoleVisible = false
+    hideBtn.Visible = false
+    showBtn.Visible = true -- показываем кнопку "Показать"
+end)
+
+showBtn.MouseButton1Click:Connect(function()
+    -- показываем окно
+    frame.Visible = true
+    consoleVisible = true
+    hideBtn.Visible = true
+    showBtn.Visible = false -- скрываем кнопку "Показать"
 end)
 
 -- Создаем кнопки для переключения инструментов
