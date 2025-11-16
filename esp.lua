@@ -14,7 +14,7 @@ local toolsToManage = {
 }
 
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "ToolRemovalConsole"
+screenGui.Name = "AutoFilter"
 screenGui.Parent = playerGui
 
 -- Создаем основной фрейм
