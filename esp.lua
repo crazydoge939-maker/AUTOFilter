@@ -80,12 +80,12 @@ hideBtn.Font = Enum.Font.SourceSans
 hideBtn.TextSize = 16
 hideBtn.Parent = frame
 
--- Создаем кнопку для показа консоли, изначально скрыта
+-- Создаем кнопку для "возврата" консоли, изначально скрыта
 local showBtn = Instance.new("TextButton")
 showBtn.Size = UDim2.new(1, -20, 0, 30)
 showBtn.Position = UDim2.new(0, 10, 0, 40)
 showBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-showBtn.Text = "Показать консоль"
+showBtn.Text = "Вернуть консоль"
 showBtn.TextColor3 = Color3.new(1,1,1)
 showBtn.Font = Enum.Font.SourceSans
 showBtn.TextSize = 16
@@ -99,7 +99,7 @@ hideBtn.MouseButton1Click:Connect(function()
     frame.Visible = false
     consoleVisible = false
     hideBtn.Visible = false
-    showBtn.Visible = true -- показываем кнопку "Показать"
+    showBtn.Visible = true -- показываем кнопку "Вернуть"
 end)
 
 showBtn.MouseButton1Click:Connect(function()
@@ -107,7 +107,7 @@ showBtn.MouseButton1Click:Connect(function()
     frame.Visible = true
     consoleVisible = true
     hideBtn.Visible = true
-    showBtn.Visible = false -- скрываем кнопку "Показать"
+    showBtn.Visible = false -- скрываем кнопку "Вернуть"
 end)
 
 -- Создаем кнопки для переключения инструментов
