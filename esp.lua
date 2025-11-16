@@ -9,6 +9,7 @@ local toolsToManage = {
 	"Gold",
 	"Metal",
 	"Stone",
+	"Wood",
 	"Leather",
 	"Meat",
 	"Rope",
