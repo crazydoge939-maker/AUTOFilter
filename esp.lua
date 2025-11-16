@@ -132,8 +132,8 @@ for i, toolName in ipairs(toolsToManage) do
 	btn.Size = buttonSize
 	btn.Position = UDim2.new(0, startX + col * (buttonSize.X.Offset + spacingX),
 		0, startY + row * (buttonSize.Y.Offset + spacingY))
-	btn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
-	btn.Text = toolName .. " (Активен)"
+	btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+	btn.Text = toolName .. " (Отключен)"
 	btn.TextColor3 = Color3.new(1,1,1)
 	btn.Font = Enum.Font.SourceSans
 	btn.TextSize = 14
@@ -158,22 +158,11 @@ end
 -- Постоянная проверка и удаление активных инструментов
 game:GetService("RunService").Stepped:Connect(function()
 	local backpack = player.Backpack
-	local character = player.Character
 
 	for _, tool in ipairs(backpack:GetChildren()) do
 		if tool:IsA("Tool") and activeStates[tool.Name] then
 			if table.find(toolsToManage, tool.Name) then
 				tool:Destroy()
-			end
-		end
-	end
-
-	if character then
-		for _, tool in ipairs(character:GetChildren()) do
-			if tool:IsA("Tool") and activeStates[tool.Name] then
-				if table.find(toolsToManage, tool.Name) then
-					tool:Destroy()
-				end
 			end
 		end
 	end
