@@ -25,7 +25,6 @@ local toolsToManage = {
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "AutoFilter"
-screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
 -- Создаем основной фрейм
