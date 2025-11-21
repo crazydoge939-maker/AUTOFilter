@@ -1,3 +1,4 @@
+
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
@@ -25,6 +26,7 @@ local toolsToManage = {
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "AutoFilter"
+screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
 -- Создаем основной фрейм
@@ -87,6 +89,11 @@ hideBtn.Font = Enum.Font.SourceSans
 hideBtn.TextSize = 16
 hideBtn.Parent = frame
 
+local screenButton = Instance.new("ScreenGui")
+screenButton.Name = "ButtonScreen"
+screenButton.ResetOnSpawn = false
+screenButton.Parent = playerGui
+
 -- Создаем кнопку для возвращения, вне фрейма
 local showBtn = Instance.new("TextButton")
 showBtn.Size = UDim2.new(0, 50, 0, 50)
@@ -97,7 +104,7 @@ showBtn.TextColor3 = Color3.new(1,1,1)
 showBtn.Font = Enum.Font.SourceSans
 showBtn.TextSize = 16
 showBtn.TextScaled = true
-showBtn.Parent = screenGui
+showBtn.Parent = screenButton
 showBtn.Active = true -- чтобы можно было перетаскивать
 showBtn.Draggable = true -- включаем перетаскивание
 showBtn.Visible = false -- изначально скрыта
