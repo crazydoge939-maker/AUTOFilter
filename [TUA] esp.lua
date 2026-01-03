@@ -12,6 +12,7 @@ local toolsToManage = {
 	"Old Gear",
 	"Gear",
 	"Fancy Handle",
+	"Rainbow  Star",
 	"Rainbow  Stardust",
 	"Moon Fragment",
 	"Cocoa Bean",
