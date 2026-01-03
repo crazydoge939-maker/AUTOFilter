@@ -3,23 +3,23 @@ local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 local toolsToManage = {
-  "Wood",
-  "Dirt",
-  "Stone",
-  "Metal",
-  "Gold",
-  "Clay",
-  "Old Gear",
-  "Gear",
-  "Fancy Handle",
-	"Rainbow  Star",
-  "Rainbow  Stardust",
-  "Moon Fragment",
-  "Cocoa Bean",
-  "Meat",
-  "Rotting Meat",
-  "Heart",
-  "Eye",
+	"Wood",
+	"Dirt",
+	"Stone",
+	"Metal",
+	"Gold",
+	"Clay",
+	"Old Gear",
+	"Gear",
+	"Fancy Handle",
+	"Rainbow  Stardust",
+	"Moon Fragment",
+	"Cocoa Bean",
+	"Meat",
+	"Rotting Meat",
+	"Heart",
+	"Eye",
+	"Skeleton"
 }
 
 local screenGui = Instance.new("ScreenGui")
