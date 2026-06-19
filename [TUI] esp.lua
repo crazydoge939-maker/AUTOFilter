@@ -21,7 +21,9 @@ local toolsToManage = {
 	"Coal",
 	"Orb",
 	"Cursed Orb",
-	"Holy Orb"
+	"Holy Orb",
+
+	"Firework",
 }
 
 local screenGui = Instance.new("ScreenGui")
