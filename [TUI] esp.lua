@@ -22,6 +22,8 @@ local toolsToManage = {
 	"Orb",
 	"Cursed Orb",
 	"Holy Orb",
+	"Meteorite",
+	"Alien Tech",
 
 	"Firework",
 }
@@ -132,8 +134,8 @@ local buttons = {}
 local activeStates = {}
 
 local buttonsPerRow = 4
-local btnW = 0.215
-local btnH = 0.15
+local btnW = 0.21
+local btnH = 0.13
 local spacingX = 0.025
 local spacingY = 0.02
 local startX = 0.025
