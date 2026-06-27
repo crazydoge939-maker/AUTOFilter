@@ -24,6 +24,9 @@ local toolsToManage = {
 	"Holy Orb",
 	"Meteorite",
 	"Alien Tech",
+	
+	"Kings Arm",
+	"Paper",
 
 	"Firework",
 }
@@ -129,32 +132,45 @@ tabBtn.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Создаем кнопки инструментов (всё на scale)
+-- ScrollingFrame для кнопок
+local scrollFrame = Instance.new("ScrollingFrame")
+scrollFrame.Name = "ButtonScroll"
+scrollFrame.Size = UDim2.new(1, 0, 0.92, 0)
+scrollFrame.Position = UDim2.new(0, 0, 0.08, 0)
+scrollFrame.BackgroundTransparency = 1
+scrollFrame.ScrollBarThickness = 6
+scrollFrame.ScrollBarImageColor3 = Color3.new(1, 1, 1)
+scrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.Parent = frame
+
+-- UIGridLayout для автоматической сетки
+local gridLayout = Instance.new("UIGridLayout")
+gridLayout.CellSize = UDim2.new(0.21, 0, 0.13, 0)
+gridLayout.CellPadding = UDim2.new(0.025, 0, 0.02, 0)
+gridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+gridLayout.Parent = scrollFrame
+
+-- Отступы внутри ScrollingFrame
+local padding = Instance.new("UIPadding")
+padding.PaddingLeft = UDim.new(0.025, 0)
+padding.PaddingTop = UDim.new(0.02, 0)
+padding.Parent = scrollFrame
+
+-- Создаем кнопки инструментов
 local buttons = {}
 local activeStates = {}
 
-local buttonsPerRow = 4
-local btnW = 0.21
-local btnH = 0.13
-local spacingX = 0.025
-local spacingY = 0.02
-local startX = 0.025
-local startY = 0.1
-
 for i, toolName in ipairs(toolsToManage) do
-	local row = math.floor((i - 1) / buttonsPerRow)
-	local col = (i - 1) % buttonsPerRow
-
 	local btn = Instance.new("TextButton")
-	btn.Size = UDim2.new(btnW, 0, btnH, 0)
-	btn.Position = UDim2.new(startX + col * (btnW + spacingX), 0,
-		startY + row * (btnH + spacingY), 0)
+	btn.Size = UDim2.new(0.21, 0, 0.13, 0)
 	btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
 	btn.Text = toolName .. " [OFF]"
 	btn.TextColor3 = Color3.new(1, 1, 1)
 	btn.Font = Enum.Font.SourceSans
 	btn.TextScaled = true
-	btn.Parent = frame
+	btn.LayoutOrder = i
+	btn.Parent = scrollFrame
 	buttons[toolName] = btn
 
 	btn.MouseButton1Click:Connect(function()
