@@ -29,7 +29,6 @@ local toolsToManage = {
 	"Paper",
 
 	"Firework",
-	"IceLolly",
 }
 
 local screenGui = Instance.new("ScreenGui")
