@@ -24,6 +24,7 @@ local toolsToManage = {
 	"Holy Orb",
 	"Meteorite",
 	"Alien Tech",
+	"Ectoplasm",
 	
 	"Kings Arm",
 	"Paper",
