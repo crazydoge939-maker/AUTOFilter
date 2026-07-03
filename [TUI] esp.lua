@@ -29,6 +29,7 @@ local toolsToManage = {
 	"Paper",
 
 	"Firework",
+	"Saints Ear",
 }
 
 local screenGui = Instance.new("ScreenGui")
