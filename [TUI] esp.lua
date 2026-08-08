@@ -25,7 +25,7 @@ local toolsToManage = {
 	"Meteorite",
 	"Alien Tech",
 	"Ectoplasm",
-	
+
 	"Kings Arm",
 	"Paper",
 
@@ -194,7 +194,10 @@ game:GetService("RunService").Stepped:Connect(function()
 	for _, tool in ipairs(backpack:GetChildren()) do
 		if tool:IsA("Tool") and activeStates[tool.Name] then
 			if table.find(toolsToManage, tool.Name) then
-				tool:Destroy()
+				-- Проверяем, что предмет всё ещё существует в инвентаре, прежде чем удалять
+				if tool.Parent == backpack then
+					tool:Destroy()
+				end
 			end
 		end
 	end
