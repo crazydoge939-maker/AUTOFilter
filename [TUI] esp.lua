@@ -201,11 +201,50 @@ for i, toolName in ipairs(toolsToManage) do
 			btn.Text = toolName .. " [OFF]"
 			btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
 		end
+		refreshToggleAll()
 	end)
 end
 
 -- Логика переключения всех кнопок сразу
 local allEnabled = false
+
+-- Проверка, включены ли все инструменты
+local function isAllEnabled()
+	for _, toolName in ipairs(toolsToManage) do
+		if not activeStates[toolName] then
+			return false
+		end
+	end
+	return true
+end
+
+-- Проверка, выключены ли все инструменты
+local function isAllDisabled()
+	for _, toolName in ipairs(toolsToManage) do
+		if activeStates[toolName] then
+			return false
+		end
+	end
+	return true
+end
+
+-- Обновление состояния кнопки ALL в зависимости от отдельных кнопок
+function refreshToggleAll()
+	if isAllEnabled() then
+		allEnabled = true
+		toggleAllBtn.Text = "ALL [ON]"
+		toggleAllBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+	elseif isAllDisabled() then
+		allEnabled = false
+		toggleAllBtn.Text = "ALL [OFF]"
+		toggleAllBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+	else
+		-- Смешанное состояние: часть включена, часть выключена
+		allEnabled = false
+		toggleAllBtn.Text = "ALL [—]"
+		toggleAllBtn.BackgroundColor3 = Color3.fromRGB(200, 160, 50)
+	end
+end
 
 local function updateAllButtons()
 	for _, toolName in ipairs(toolsToManage) do
@@ -229,7 +268,8 @@ local function updateAllButtons()
 end
 
 toggleAllBtn.MouseButton1Click:Connect(function()
-	allEnabled = not allEnabled
+	-- Если все включены — выключаем все, иначе (все выключены или смешанное состояние) — включаем все
+	allEnabled = not isAllEnabled()
 	updateAllButtons()
 end)
 
