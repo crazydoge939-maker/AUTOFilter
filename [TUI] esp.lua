@@ -134,11 +134,25 @@ tabBtn.MouseButton1Click:Connect(function()
 	end
 end)
 
+-- Кнопка включения/выключения всех инструментов
+local toggleAllBtn = Instance.new("TextButton")
+toggleAllBtn.Name = "ToggleAllButton"
+toggleAllBtn.Size = UDim2.new(1, 0, 0.06, 0)
+toggleAllBtn.Position = UDim2.new(0, 0, 0.08, 0)
+toggleAllBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+toggleAllBtn.BorderSizePixel = 2
+toggleAllBtn.BorderColor3 = Color3.new(1, 1, 1)
+toggleAllBtn.Text = "ALL [OFF]"
+toggleAllBtn.TextColor3 = Color3.new(1, 1, 1)
+toggleAllBtn.Font = Enum.Font.SourceSansBold
+toggleAllBtn.TextScaled = true
+toggleAllBtn.Parent = frame
+
 -- ScrollingFrame для кнопок
 local scrollFrame = Instance.new("ScrollingFrame")
 scrollFrame.Name = "ButtonScroll"
-scrollFrame.Size = UDim2.new(1, 0, 0.92, 0)
-scrollFrame.Position = UDim2.new(0, 0, 0.08, 0)
+scrollFrame.Size = UDim2.new(1, 0, 0.86, 0)
+scrollFrame.Position = UDim2.new(0, 0, 0.14, 0)
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.ScrollBarThickness = 6
 scrollFrame.ScrollBarImageColor3 = Color3.new(1, 1, 1)
@@ -186,6 +200,35 @@ for i, toolName in ipairs(toolsToManage) do
 		end
 	end)
 end
+
+-- Логика переключения всех кнопок сразу
+local allEnabled = false
+
+local function updateAllButtons()
+	for _, toolName in ipairs(toolsToManage) do
+		local btn = buttons[toolName]
+		activeStates[toolName] = allEnabled
+		if allEnabled then
+			btn.Text = toolName .. " [ON]"
+			btn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+		else
+			btn.Text = toolName .. " [OFF]"
+			btn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+		end
+	end
+	if allEnabled then
+		toggleAllBtn.Text = "ALL [ON]"
+		toggleAllBtn.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+	else
+		toggleAllBtn.Text = "ALL [OFF]"
+		toggleAllBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+	end
+end
+
+toggleAllBtn.MouseButton1Click:Connect(function()
+	allEnabled = not allEnabled
+	updateAllButtons()
+end)
 
 -- Постоянная проверка и удаление активных инструментов
 game:GetService("RunService").Stepped:Connect(function()
